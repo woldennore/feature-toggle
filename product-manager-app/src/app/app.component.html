@@ -1,0 +1,19 @@
+<div class="head-bar" fxLayout="row" fxLayoutAlign="space-between center" >
+  <mat-icon aria-hidden="false" (click)="drawer.toggle()" aria-label="menu" style="cursor: pointer;">menu</mat-icon>
+  <h1 class="head-title" fxHide.xs>Feature Management</h1>
+  <h3 class="head-title" fxHide.gt-xs>Feature Management</h3>
+  <div>Welcome</div>
+</div>
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side" fxLayout="column">
+    <h4 class="menu-title" style="text-align: center;">MENU</h4>
+    <div class="menu-option" routerLink="/customer" >Customers</div>
+    <div class="menu-option" routerLink="/feature" >Features</div>
+  </mat-drawer>
+  
+  <router-outlet></router-outlet>
+
+  
+</mat-drawer-container>
+
+

@@ -1,0 +1,70 @@
+<h2 style="text-align: center;">Features</h2>
+
+<div class="div-feature">
+    <h3 style="text-align: center;">{{feature.id ? 'Edit Feature ( ID: '+feature.id +' )': 'Add Feature'}}</h3>
+    <form [formGroup]="formFeature" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px">
+        <div fxLayout="row" fxLayoutAlign="start start">
+            <mat-form-field>
+                <input matInput placeholder="Display Name" autocomplete="false" formControlName="displayName">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Technical Name" autocomplete="false" formControlName="technicalName">
+                <mat-error *ngIf="formFeature.controls.technicalName.errors != null" style="text-align: end;">*
+                    Required.</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Expires On</mat-label>
+                <input matInput placeholder="Expires On" autocomplete="false" formControlName="expiresOn"
+                    [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start start">
+            <mat-form-field>
+                <input matInput placeholder="Description" autocomplete="false" formControlName="description">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Customers</mat-label>
+                <mat-select formControlName="customerIds" multiple>
+                    <mat-option *ngFor="let cus of customers" [value]="cus.id">{{cus.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-checkbox class="check-inverted" formControlName="inverted" style="width: 188px;">Inverted</mat-checkbox>
+        </div>
+    </form>
+    <div style="width: 100%; padding: 15px;" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
+        <button mat-raised-button color="primary" class="save-button" [disabled]="formFeature.invalid"
+            (click)="saveFeature()">Save</button>
+        <button mat-raised-button color="secondary" class="save-button" (click)="clearForm()">Clear</button>
+    </div>
+
+</div>
+<div class="div-feature">
+    <h3 style="text-align: center;">List of Features</h3>
+    <table style="padding: 15px;">
+        <th>Id</th>
+        <th>Display Name</th>
+        <th>Technical Name</th>
+        <th>Expires On</th>
+        <th>Description</th>
+        <th>Inverted</th>
+        <th>Actions</th>
+        <tr *ngFor="let fea of features">
+            <td>{{fea.id}}</td>
+            <td>{{fea.displayName}}</td>
+            <td>{{fea.technicalName}}</td>
+            <td>{{fea.expiresOn}}</td>
+            <td>{{fea.description}}</td>
+            <td>{{fea.inverted}}</td>
+            <td *ngIf="fea.archived"> Archived</td>
+            <td *ngIf="!fea.archived">
+                <mat-icon aria-hidden="false" (click)="edit(fea)" aria-label="edit" style="cursor: pointer;" title="Edit">edit
+                </mat-icon>
+                <mat-icon aria-hidden="false" (click)="archive(fea)" aria-label="edit" style="cursor: pointer;" title="Archive">archive
+                </mat-icon>
+            </td>
+        </tr>
+    </table>
+    <p style="text-align: end;padding-right: 15px;">Quantity: {{features.length}}</p>
+</div>
