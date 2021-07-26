@@ -1,6 +1,6 @@
 # feature-toggle
 
-Versions:
+Versions used:
  - Java: 11.0.10
  - Node: 14.17.3
  - Angular: 12.1.1
